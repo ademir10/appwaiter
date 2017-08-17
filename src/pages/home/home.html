@@ -1,14 +1,26 @@
 <ion-header>
+
   <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-navbar>
+    <img src="assets/images/logo.png" class="logo-title" /><ion-title>AppRest</ion-title>
+    </ion-navbar>
+
 </ion-header>
 
+
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+
+<h3>Bem vindo!</h3>
+Clique no botão abaixo e aponte a camera do seu dispositivo para o QRcode que se encontra na mesa.
+<br><br><br>
+  <div align="center">
+    <img src="assets/images/intro.png" class="logo" /><p>
+  <button ion-button block class="marginTop" color="danger" (click)="scan()">Check QRcode</button>
+
+</div>
+<div *ngIf="scanData">
+    <p>Scanned Text: {{scanData.text}} </p>
+    <p>Scanned Format: {{scanData.format}} </p>
+
+</div>
+
 </ion-content>
