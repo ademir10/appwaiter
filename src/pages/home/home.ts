@@ -21,6 +21,7 @@ import 'rxjs/add/operator/toPromise';
 export class HomePage {
 //variaveis para enviar os dados para a API
 public numero_mesa;
+public mensagem;
 responseData : any;
 mesaData = { numero_mesa: '' };
 private enderecoApi: string = "http://192.168.0.37:3000/";
@@ -71,17 +72,37 @@ send_desk_data(){
     'Content-Type' : 'application/json'
   });
   let options = new RequestOptions({ headers: headers });
-
+  //here we send the data to API
   let data = JSON.stringify({
-    cardToken: 'Deus até o fim',
+    cardToken: 'G0d1$@Bl3T0d0W4Th3V3Rth1Ng',
     numero_da_mesa: this.numero_mesa
   });
 
   return new Promise((resolve, reject) => {
     this.http.post(this.enderecoApi + '/check_mesa', data, options)
     .toPromise()
-    .then((response) =>
-    {
+    .then((response) => {
+      const retorno_da_API = response.json();
+      //store session data and redirect to specific app view
+      localStorage.setItem('userData', JSON.stringify(this.responseData));
+      //const page = (retorno_da_API.error) ? 'HomePage' : 'MenuPage';
+      //this.navCtrl.push(page);
+
+        //verify if QRpoint is free
+        if (retorno_da_API.retorno_rails === 'A MESA ESTÁ LIVRE') {
+          this.mensagem = 'Olá seja bem vindo, faça o seu pedido!'
+          this.navCtrl.push('MenuPage')
+        }
+        else {
+          this.mensagem = 'Desculpe este local encontra-se indisponível.'
+        }
+
+        const alert = this.alertCtrl.create({
+        subTitle: this.mensagem,
+        buttons: ['OK'],
+      });
+      alert.present();
+
       console.log('API Response : ', response.json());
       resolve(response.json());
     })

@@ -9,7 +9,6 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 import { MyApp } from './app.component';
 
-
 @NgModule({
   declarations: [
     MyApp,
@@ -30,7 +29,7 @@ import { MyApp } from './app.component';
     StatusBar,
     SplashScreen,
      BarcodeScanner,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
   ]
 })
 export class AppModule {}
