@@ -1,19 +1,31 @@
-<!--
-  Generated template for the MenuPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
   <ion-navbar>
-    <ion-title>menu</ion-title>
+      <img src="assets/images/logo.png" class="logo-title" /><ion-title>{{ title }}</ion-title>
   </ion-navbar>
-
+  <ion-searchbar (ionInput)="getItems($event)" [debounce]="500" placeholder="Buscar..."></ion-searchbar>
 </ion-header>
 
+<ion-content>
 
-<ion-content padding>
-<h1>AQUI FICA O CARDÁPIO</h1>
-<button ion-button block class="marginTop" (click)="logout()">Logout</button>
+  <ion-list>
+          <ion-item-sliding *ngFor="let t of all_categories">
+              <ion-item>
+                <h2>{{ t.name }}</h2>
+                </ion-item>
+
+              <ion-item-options side="right">
+                <button ion-button color="warning" (click)="show(t.id)"><ion-icon name="ios-information-circle"></ion-icon>Show</button>
+                  <button ion-button color="danger" (click)="delete(t.id)"><ion-icon name="trash"></ion-icon> Delete</button>
+
+
+              <!-- para fazer o logoff se preciso
+              <ion-content padding>
+              <h1>{{ title }}</h1>
+              <button ion-button block class="marginTop" (click)="logout()">Logout</button>
+              </ion-content>
+             -->
+
+              </ion-item-options>
+          </ion-item-sliding>
+      </ion-list>
 </ion-content>

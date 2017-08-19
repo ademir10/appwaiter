@@ -93,8 +93,14 @@ send_desk_data(){
           this.mensagem = 'Olá seja bem vindo, faça o seu pedido!'
           this.navCtrl.push('MenuPage')
         }
-        else {
+        if (retorno_da_API.retorno_rails === 'A MESA ESTÁ EM USO') {
           this.mensagem = 'Desculpe este local encontra-se indisponível.'
+        }
+        if (retorno_da_API.retorno_rails === 'CÓDIGO INVALIDO') {
+          this.mensagem = 'O Código informado não existe.'
+        }
+        if (retorno_da_API.retorno_rails === 'ACESSO NEGADO') {
+          this.mensagem = 'Acesso negado!.'
         }
 
         const alert = this.alertCtrl.create({
