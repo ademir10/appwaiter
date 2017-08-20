@@ -10,21 +10,14 @@
   <ion-list>
           <ion-item-sliding *ngFor="let t of all_categories">
               <ion-item>
+                <ion-thumbnail item-start>
+                  <img src="{{enderecoApi}}{{ t['image']['url'] }}"/>
+                </ion-thumbnail>
                 <h2>{{ t.name }}</h2>
-                </ion-item>
-
-              <ion-item-options side="right">
+              </ion-item>
+            <ion-item-options side="right">
                 <button ion-button color="warning" (click)="show(t.id)"><ion-icon name="ios-information-circle"></ion-icon>Show</button>
                   <button ion-button color="danger" (click)="delete(t.id)"><ion-icon name="trash"></ion-icon> Delete</button>
-
-
-              <!-- para fazer o logoff se preciso
-              <ion-content padding>
-              <h1>{{ title }}</h1>
-              <button ion-button block class="marginTop" (click)="logout()">Logout</button>
-              </ion-content>
-             -->
-
               </ion-item-options>
           </ion-item-sliding>
       </ion-list>

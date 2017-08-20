@@ -24,10 +24,10 @@ export class MenuPage {
   private dados_usuario: any;
   responseData : any;
   userData = { name: '', email: '',merda: '' };
-  private enderecoApi: string = "http://192.168.0.37:3000/";
+  public enderecoApi: string = "http://192.168.0.37:3000/";
   //para fazer o search
   private searchQuery: string = '';
-  private all_categories: any; // <- esta variavel é a responsável em levar os dados para a view
+  public all_categories: any; // <- esta variavel é a responsável em levar os dados para a view
 
   constructor(
     public navCtrl: NavController,
