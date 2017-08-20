@@ -1,16 +1,9 @@
 page-menu {
 
-  ion-card img {
-    margin: auto;
-    width: 15vw;
-    height: 15vw;
-    border-radius: 50%; // half for rounding */
-    object-fit: cover; /* Scale the image - Center and crop image*/
-    object-position: center; /* Center the image within the element - Center and crop image*/
-}
+
   .card-width {
     width: 100vw;
-    height: 22vw;
+    height: 25vw;
   }
 
   .item-block {
@@ -28,8 +21,8 @@ page-menu {
 .imgListaPosition {
     position: absolute;
     z-index: 5;
-    top: 20%;
-    left: 80%;
+    top: 11%;
+    left: 71%;
 }
 
 .imgListaSize {
@@ -37,7 +30,7 @@ page-menu {
     height : 100px;
     max-width: 100px;
     max-height: 100px;
-    border-radius: 50px;
+    border-radius: 10px;
 }
 
 }
