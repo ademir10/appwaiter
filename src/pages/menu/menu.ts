@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, AlertController, LoadingController, NavParams, App } from 'ionic-angular';
-import { Http, Headers, RequestOptions } from '@angular/http';
+import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/toPromise';
@@ -19,14 +19,11 @@ import 'rxjs/add/operator/toPromise';
 })
 export class MenuPage {
   //o titulo usado na view
-  title = 'Nosso Cardápio';
+  title = 'Categorias';
   private categories_api: any;
-  private dados_usuario: any;
   responseData : any;
   userData = { name: '', email: '',merda: '' };
   public enderecoApi: string = "http://192.168.0.37:3000/";
-  //para fazer o search
-  private searchQuery: string = '';
   public all_categories: any; // <- esta variavel é a responsável em levar os dados para a view
 
   constructor(

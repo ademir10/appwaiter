@@ -10,6 +10,7 @@
   height: 30px;
 }
 
+$toolbar-background: #ef473a;
 
 // Font path is used to include ionicons,
 // roboto, and noto sans fonts
@@ -51,7 +52,10 @@ $colors: (
   dark:       #222
 );
 
-
+//muda o background de todas as views
+.fixed-content{
+    background-color: #f5f0eb;
+}
 // App iOS Variables
 // --------------------------------------------------
 // iOS only Sass variables can go here

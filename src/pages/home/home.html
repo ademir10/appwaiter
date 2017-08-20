@@ -7,20 +7,38 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+  <ion-slides pager="true" parallax="true" padding>
 
-<h3>Bem vindo!</h3>
-Clique no botão abaixo e aponte a camera do seu dispositivo para o QRcode que se encontra na mesa.
-<br><br><br>
-  <div align="center">
-    <img src="assets/images/intro.png" class="logo" /><p>
-  <button ion-button block class="marginTop" color="danger" (click)="scan()">Check QRcode</button>
+    <ion-slide>
+      <img src="assets/images/chef-slide.png">
+      <h1>Olá!</h1>
+      <p>Pronto para fazer o seu pedido?</p>
+    </ion-slide>
 
-</div>
-<div *ngIf="scanData">
-    <p>Scanned Text: {{scanData.text}} </p>
-    <p>Scanned Format: {{scanData.format}} </p>
+    <ion-slide>
+      <img src="assets/images/cellphone-slide.png">
+      <h1>É tudo muito simples.</h1>
+      <p>Você só precisa escolher o que quer..</p>
+    </ion-slide>
 
-</div>
+    <ion-slide>
+      <img src="assets/images/qrcode-slide.png">
+      <h1>Vamos começar!</h1>
+      Clique no botão abaixo e aponte a camera do seu dispositivo para o QRcode que se encontra na mesa.
+      <br><br><br>
+        <div align="center">
 
+        <button ion-button block class="marginTop" color="primary" (click)="scan()">Check QRcode</button>
+
+      </div>
+      <!-- EXIBIR O QRCODE LIDO PELA CAMERA
+      <div *ngIf="scanData">
+          <p>Scanned Text: {{scanData.text}} </p>
+          <p>Scanned Format: {{scanData.format}} </p>
+     </div>
+     -->
+    </ion-slide>
+
+  </ion-slides>
 </ion-content>
