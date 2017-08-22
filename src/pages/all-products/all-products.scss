@@ -1,9 +1,8 @@
-page-menu {
-
+page-all-products {
 
   .card-width {
     width: 100vw;
-    height: 25vw;
+    height: 50vw;
   }
 
   .item-block {
@@ -16,28 +15,28 @@ page-menu {
     ion-item {
         background-color: #f5f0eb;
     }
-}
+  }
 
-.imgListaPosition {
+  .imgListaPosition {
     position: absolute;
     z-index: 5;
     top: 10%;
     left: 80%;
-}
+  }
 
-#button {
+  #button {
     position: absolute;
     z-index: 5;
-    top: 60%;
-    left: 80%;
-}
+    top: 70%;
+    left: 70%;
+  }
 
-.imgListaSize {
+  .imgListaSize {
     width: 100px;
     height : 100px;
     max-width: 100px;
     max-height: 100px;
     border-radius: 10px;
-}
+  }
 
 }

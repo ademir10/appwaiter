@@ -23,7 +23,7 @@ export class HomePage {
 public numero_mesa;
 public mensagem;
 responseData : any;
-mesaData = { numero_mesa: '' };
+
 private enderecoApi: string = "http://192.168.0.37:3000/";
 verifica_usuario: any;
 
@@ -119,19 +119,9 @@ send_desk_data(){
       reject(error.json());
     });
   });
-
 }
 
-//CHAMA O MENU DEPOIS DE AUTENTICADO
-chama_menu() {
-  // mensagem no login
-  const alert = this.alertCtrl.create({
-    subTitle: 'Chamou a view menu!',
-    buttons: ['OK'],
-  });
-  alert.present();
-  this.navCtrl.push('MenuPage')
-}
+
 
 
 }

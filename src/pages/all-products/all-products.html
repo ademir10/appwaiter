@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-navbar>
+      <img src="assets/images/logo.png" class="logo-title" /><ion-title>{{ var_category_name }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card *ngFor="let t of all_products.all_products">
+
+    <ion-item>
+
+      <h2>{{t.name}}</h2>
+      <p>{{ var_category_name }}</p>
+    </ion-item>
+    <br>
+    <img src="{{enderecoApi}}{{ t['image']['url'] }}" class="imgListaSize">
+
+    <ion-card-content>
+      <p>{{t.description}}</p>
+    </ion-card-content>
+
+    <ion-row>
+      <ion-col>
+      </ion-col>
+      <ion-col>
+      </ion-col>
+      <ion-col center text-center>
+        <ion-note>
+
+            <button ion-button small (click)="teste({id: t.id, nome_category: t.name})">Adicionar</button>
+
+        </ion-note>
+      </ion-col>
+    </ion-row>
+
+  </ion-card>
+
+</ion-content >
+
+<ion-footer>
+  <ion-toolbar>
+
+    <ion-buttons end>
+      <button ion-button icon-right color="royal">
+        Minha consumação
+        <ion-icon name="send"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
