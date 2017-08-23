@@ -24,7 +24,7 @@ public numero_mesa;
 public mensagem;
 responseData : any;
 
-private enderecoApi: string = "http://192.168.0.37:3000/";
+private enderecoApi: string = "http://dsoft.ddns.net:1000/";
 verifica_usuario: any;
 
   scanData : {};
@@ -117,6 +117,7 @@ send_desk_data(){
       console.error('API Error : ', error.status);
       console.error('API Error : ', JSON.stringify(error));
       reject(error.json());
+
     });
   });
 }

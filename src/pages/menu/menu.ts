@@ -20,7 +20,7 @@ export class MenuPage {
   public id_category;
   public name_category;
 
-  public enderecoApi: string = "http://192.168.0.37:3000/";
+  public enderecoApi: string = "http://dsoft.ddns.net:1000/";
   public all_categories: any; // <- esta variavel é a responsável em levar os dados para a view
   public id_categoria: string;
   public nome_categoria: string;

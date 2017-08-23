@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar hideBackButton="true">
       <img src="assets/images/logo.png" class="logo-title" /><ion-title>{{ title }}</ion-title>
   </ion-navbar>
   <ion-searchbar (ionInput)="getItems($event)" [debounce]="500" placeholder="Buscar..."></ion-searchbar>
@@ -18,7 +18,7 @@
             </ion-thumbnail>
         </div>
         <ion-card-content>
-{{ userData.id }}
+
             Descrição:
             <p>
             {{ t.description }}

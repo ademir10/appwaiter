@@ -18,7 +18,8 @@ import { MyApp } from './app.component';
     BrowserModule,
     // IMPORTADO PARA O RACK CORS
     HttpModule,
-    IonicModule.forRoot(MyApp)
+    //aqui eu altero os dizeres do botão voltar
+    IonicModule.forRoot(MyApp, { backButtonText: 'Voltar'} )
   ],
   bootstrap: [IonicApp],
   entryComponents: [
