@@ -20,7 +20,7 @@ export class MenuPage {
   public id_category;
   public name_category;
 
-  public enderecoApi: string = "http://dsoft.ddns.net:1000/";
+  public enderecoApi: string = "http://localhost:3000/";
   public all_categories: any; // <- esta variavel é a responsável em levar os dados para a view
   public id_categoria: string;
   public nome_categoria: string;
@@ -79,7 +79,7 @@ export class MenuPage {
 
 
 
-  teste (data:any){
+  category_products (data:any){
 
     this.id_category = data.category_id;
     this.name_category = data.category_name;
@@ -100,7 +100,6 @@ export class MenuPage {
       .toPromise()
       //aqui o retorno da API é carregado em Json em um array
       .then((response) => {
-        const retorno_da_API = response.json();
         this.products = response.json();
         //store session data and redirect to specific app view
         //localStorage.setItem('userData', JSON.stringify(this.responseData));
@@ -109,8 +108,6 @@ export class MenuPage {
         this.navCtrl.push('AllProductsPage',{id_categoria: data.category_id, nome_categoria: data.category_name, produtos_categoria: this.products});
         console.log('API Response : ', response.json());
         resolve(response.json());
-
-
 
       })
       .catch((error) =>
