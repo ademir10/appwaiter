@@ -20,7 +20,7 @@ export class MenuPage {
   public id_category;
   public name_category;
 
-  public enderecoApi: string = "http://localhost:3000/";
+  public enderecoApi: string = "http://192.168.0.37:3000/";
   public all_categories: any; // <- esta variavel é a responsável em levar os dados para a view
   public id_categoria: string;
   public nome_categoria: string;
@@ -75,9 +75,6 @@ export class MenuPage {
      this.name_category = data.category_name;
      this.navCtrl.push('AllProductsPage',{id_categoria: data.category_id, nome_categoria: data.category_name});
   }
-
-
-
 
   category_products (data:any){
 

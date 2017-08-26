@@ -5,6 +5,9 @@ import { BarcodeScanner ,BarcodeScannerOptions } from '@ionic-native/barcode-sca
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/toPromise';
+//para guardar o id da mesa aberta localmente
+import { Storage } from '@ionic/storage';
+import { NativeStorage } from '@ionic-native/native-storage';
 
 /**
  * Generated class for the HomePage page.
@@ -24,7 +27,7 @@ public numero_mesa;
 public mensagem;
 responseData : any;
 
-private enderecoApi: string = "http://localhost:3000/";
+private enderecoApi: string = "http://192.168.0.37:3000/";
 verifica_usuario: any;
 
   scanData : {};
@@ -34,7 +37,9 @@ verifica_usuario: any;
   public navParams: NavParams,
   public alertCtrl: AlertController,
   private barcodeScanner: BarcodeScanner,
-  public http: Http) {
+  public http: Http,
+  //para armazenar o id da mesa localmente
+  private nativeStorage: NativeStorage) {
   }
 
   ionViewDidLoad() {
@@ -84,12 +89,20 @@ send_desk_data(){
     .then((response) => {
       const retorno_da_API = response.json();
       //store session data and redirect to specific app view
-      localStorage.setItem('userData', JSON.stringify(this.responseData));
+      //localStorage.setItem('userData', JSON.stringify(this.responseData));
       //const page = (retorno_da_API.error) ? 'HomePage' : 'MenuPage';
       //this.navCtrl.push(page);
 
         //verify if QRpoint is free
         if (retorno_da_API.retorno_rails === 'A MESA ESTÁ LIVRE') {
+
+          this.nativeStorage.setItem('myitem', {id_da_mesa: retorno_da_API.id_da_mesa})
+  .then(
+    () => console.log('Stored item!'),
+    error => console.error('Error storing item', error)
+  );
+
+
           this.mensagem = 'Olá seja bem vindo, faça o seu pedido!'
           this.navCtrl.push('MenuPage')
         }

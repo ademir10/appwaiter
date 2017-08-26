@@ -4,6 +4,8 @@ import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/toPromise';
+//para guardar o id da mesa aberta localmente
+import { NativeStorage } from '@ionic-native/native-storage';
 
 @IonicPage()
 @Component({
@@ -17,15 +19,17 @@ export class AllProductsPage {
   var_category_id: string = this.navParams.get('id_categoria');
   var_category_name: string = this.navParams.get('nome_categoria');
   var_products: string = this.navParams.get('produtos_categoria');
-  public enderecoApi: string = "http://localhost:3000/";
+  public enderecoApi: string = "http://192.168.0.37:3000/";
   public all_products: any;
-
+  public id_aberto: any;
   constructor(
      public navCtrl: NavController,
      public navParams: NavParams,
      public alertCtrl: AlertController,
      public http: Http,
-     public app: App) {
+     public app: App,
+     //para armazenar o id da mesa localmente
+     private nativeStorage: NativeStorage) {
       console.log('AO CARREGAR A VIEW : ', this.var_products);
       this.initializeItems();
    }
@@ -35,8 +39,15 @@ export class AllProductsPage {
      }
 
  add_product() {
+   this.id_aberto = this.nativeStorage.getItem('myitem')
+   this.nativeStorage.getItem('myitem')
+  .then(
+    data => console.log(data),
+    error => console.error(error)
+  );
+
    const alert = this.alertCtrl.create({
-     subTitle: 'Chegou na function Glória a Deus!',
+     subTitle: this.id_aberto.id_da_mesa,
      buttons: ['OK'],
    });
    alert.present();
