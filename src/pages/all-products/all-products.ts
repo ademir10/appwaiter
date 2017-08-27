@@ -63,7 +63,8 @@ export class AllProductsPage {
             let data = JSON.stringify({
             cardToken: 'G0d1$@Bl3T0d0W4Th3V3Rth1Ng',
             desk_order_id: dados_mesa_aberta.id_da_mesa,
-            product_id: this.id_produto
+            product_id: this.id_produto,
+            qnt_product: this.currentNumber
             });
 
             return new Promise((resolve, reject) => {

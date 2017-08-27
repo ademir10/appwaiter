@@ -29,7 +29,7 @@
           <ion-icon name="remove-circle" (click)="decrement()"></ion-icon>
             {{currentNumber}}
           <ion-icon name="add-circle" (click)="increment()"></ion-icon>
-            <button ion-button small (click)="add_product({id_produto: t.id, nome_produto: t.name})">Adicionar</button>
+            <button ion-button small (click)="add_product({id_produto: t.id, nome_produto: t.name, qnt_produto: currentNumber })">Adicionar</button>
         </ion-note>
       </ion-col>
     </ion-row>
