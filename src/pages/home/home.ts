@@ -6,15 +6,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/toPromise';
 //para guardar o id da mesa aberta localmente
-import { Storage } from '@ionic/storage';
 import { NativeStorage } from '@ionic-native/native-storage';
-
-/**
- * Generated class for the HomePage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -56,12 +48,6 @@ verifica_usuario: any;
     this.scanData = barcodeData;
     this.numero_mesa = barcodeData.text;
 
-    //const alert = this.alertCtrl.create({
-    //  subTitle: 'Esse é o numero da mesa vindo no scan: ' + this.numero_mesa,
-    //  buttons: ['OK'],
-    //});
-    //alert.present();
-
     this.send_desk_data();
 
     }, (err) => {
@@ -72,10 +58,7 @@ verifica_usuario: any;
 //ENVIA O NUMERO DA MESA PARA A API Rails
 send_desk_data(){
 
-  let headers = new Headers(
-  {
-    'Content-Type' : 'application/json'
-  });
+  let headers = new Headers({ 'Content-Type' : 'application/json'});
   let options = new RequestOptions({ headers: headers });
   //here we send the data to API
   let data = JSON.stringify({
@@ -88,22 +71,16 @@ send_desk_data(){
     .toPromise()
     .then((response) => {
       const retorno_da_API = response.json();
-      //store session data and redirect to specific app view
-      //localStorage.setItem('userData', JSON.stringify(this.responseData));
-      //const page = (retorno_da_API.error) ? 'HomePage' : 'MenuPage';
-      //this.navCtrl.push(page);
 
         //verify if QRpoint is free
         if (retorno_da_API.retorno_rails === 'A MESA ESTÁ LIVRE') {
-
-          this.nativeStorage.setItem('myitem', {id_da_mesa: retorno_da_API.id_da_mesa})
+          //o id da mesa é guardado localmente para ser usado na adição dos produtos
+          this.nativeStorage.setItem('current_session', {id_da_mesa: retorno_da_API.id_da_mesa})
   .then(
-    () => console.log('Stored item!'),
-    error => console.error('Error storing item', error)
+    () => console.log('Stored session!'),
+    error => console.error('Error storing session', error)
   );
-
-
-          this.mensagem = 'Olá seja bem vindo, faça o seu pedido!'
+        this.mensagem = 'Olá seja bem vindo, faça o seu pedido!'
           this.navCtrl.push('MenuPage')
         }
         if (retorno_da_API.retorno_rails === 'A MESA ESTÁ EM USO') {

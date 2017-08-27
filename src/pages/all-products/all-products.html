@@ -9,7 +9,6 @@
   <ion-card *ngFor="let t of all_products.all_products">
 
     <ion-item>
-
       <h2>{{t.name}}</h2>
       <p>{{ var_category_name }}</p>
     </ion-item>
@@ -27,13 +26,13 @@
       </ion-col>
       <ion-col center text-center>
         <ion-note>
-
-            <button ion-button small (click)="add_product({id: t.id, nome_category: t.name})">Adicionar</button>
-
+          <ion-icon name="remove-circle" (click)="decrement()"></ion-icon>
+            {{currentNumber}}
+          <ion-icon name="add-circle" (click)="increment()"></ion-icon>
+            <button ion-button small (click)="add_product({id_produto: t.id, nome_produto: t.name})">Adicionar</button>
         </ion-note>
       </ion-col>
     </ion-row>
-
   </ion-card>
 
 </ion-content >
@@ -42,9 +41,7 @@
   <ion-toolbar>
 
     <ion-buttons end>
-      <button ion-button icon-right color="royal">
-        Minha consumação
-        <ion-icon name="send"></ion-icon>
+      <button ion-button icon-right color="royal" (click)="presentProfileModal()">Minha consumação<ion-icon name="send"></ion-icon>
       </button>
     </ion-buttons>
   </ion-toolbar>
