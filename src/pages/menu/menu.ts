@@ -4,6 +4,8 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/toPromise';
+//para guardar o id da mesa aberta localmente
+import { NativeStorage } from '@ionic-native/native-storage';
 
 @IonicPage()
 @Component({
@@ -31,7 +33,9 @@ export class MenuPage {
      public alertCtrl: AlertController,
      public http: Http,
      private loadingCtrl: LoadingController,
-     public app: App) {
+     public app: App,
+     //para armazenar o id da mesa localmente
+     private nativeStorage: NativeStorage) {
 
       let loadingPopup = this.loadingCtrl.create({
         content: 'Loading...'
@@ -77,10 +81,8 @@ export class MenuPage {
   }
 
   category_products (data:any){
-
     this.id_category = data.category_id;
     this.name_category = data.category_name;
-
     let headers = new Headers(
     {
       'Content-Type' : 'application/json'
@@ -105,7 +107,6 @@ export class MenuPage {
         this.navCtrl.push('AllProductsPage',{id_categoria: data.category_id, nome_categoria: data.category_name, produtos_categoria: this.products});
         console.log('API Response : ', response.json());
         resolve(response.json());
-
       })
       .catch((error) =>
       {
@@ -116,7 +117,40 @@ export class MenuPage {
     });
   }
 
+  //exibe os dados já consumidos
+  check_consumacao() {
+    this.nativeStorage.getItem('current_session').then
+        ((dados_mesa_aberta) =>
+        {
+             let headers = new Headers({ 'Content-Type' : 'application/json'});
+             let options = new RequestOptions({ headers: headers });
+             //here we send the data to API
+             let data = JSON.stringify({
+             cardToken: 'G0d1$@Bl3T0d0W4Th3V3Rth1Ng',
+             desk_order_id: dados_mesa_aberta.id_da_mesa,
+             });
+             return new Promise((resolve, reject) => {
+               this.http.post(this.enderecoApi + 'check_order', data, options)
+               .toPromise()
+               .then((response) => {
+                 const retorno_da_API = response.json();
+                 this.navCtrl.push('CheckOrderPage',{ desk_name: retorno_da_API.mesa_venda, items: retorno_da_API.items_venda, total_geral: retorno_da_API.total_geral });
+                 console.log('API Response : ', response.json());
+                 resolve(response.json());
+               })
+               .catch((error) =>
+               {
+                 console.error('API Error : ', error.status);
+                 console.error('API Error : ', JSON.stringify(error));
+                 reject(error.json());
 
+               });
+             });
+
+        }), error => {
+          console.error('Ocorreu um erro : ', error.status);
+        };
+  }
 
 
 
