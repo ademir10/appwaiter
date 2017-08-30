@@ -69,7 +69,6 @@ public item_id;
                  this.http.post(this.enderecoApi + 'close_order', data, options)
                  .toPromise()
                  .then((response) => {
-                   const retorno_da_API = response.json();
                    const alert = this.alertCtrl.create({
                    subTitle: 'Sua solicitação já foi enviada, aguarde o nosso atendente trazer a sua conta, obrigado!',
                    buttons: ['OK'],
