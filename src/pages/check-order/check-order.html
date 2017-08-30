@@ -19,13 +19,20 @@
                 <p><span item-left>{{ t.qnt }} x R${{ t.val_unit | number:'1.2-2' }} = </span> <span item-right> R${{ t.val_total | number:'1.2-2' }}</span></p>
               </ion-item>
                 <ion-item-options side="right">
-                <button ion-button color="warning" (click)="show(t.id)"><ion-icon name="ios-information-circle"></ion-icon>Show</button>
-                  <button ion-button color="danger" (click)="delete(t.id)"><ion-icon name="trash"></ion-icon> Delete</button>
-
+                  <button ion-button color="danger" (click)="delete_item(t.id)"><ion-icon name="trash"></ion-icon> Excluir</button>
               </ion-item-options>
           </ion-item-sliding>
       </ion-list>
-    <h1 align="right"><b>Total geral R${{ var_total_geral }}</b>&nbsp;</h1>
+    <h1 align="right"><b>Total geral R${{ var_total_geral | number:'1.2-2' }}</b>&nbsp;</h1>
 </ion-card>
 
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons end>
+      <button ion-button icon-right color="royal" (click)="close_desk_order()">Fechar minha conta<ion-icon name="ion-card"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

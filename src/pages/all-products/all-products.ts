@@ -21,7 +21,6 @@ export class AllProductsPage {
   var_category_name: string = this.navParams.get('nome_categoria');
   var_products: string = this.navParams.get('produtos_categoria');
   private enderecoApi: string = "http://192.168.0.37:3000/";
-
   public all_products: any;
   public id_aberto: any;
   public id_produto: any;
@@ -41,12 +40,10 @@ export class AllProductsPage {
    private increment () {
      this.currentNumber++;
    }
-
    private decrement () {
-     if (this.currentNumber > 1) {
-     this.currentNumber--;
-   }
-
+       if (this.currentNumber > 1) {
+       this.currentNumber--;
+     }
    }
 
    initializeItems() {
