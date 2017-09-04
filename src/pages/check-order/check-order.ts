@@ -35,6 +35,16 @@ public item_id;
 
   //verifica se realmente  quer deletar o item
     close_desk_order(t){
+      //verifica se já existem itens adicionados para permitir o fechamento da mesa
+      if (this.var_total_geral === '0.0') {
+        const alert = this.alertCtrl.create({
+        subTitle: 'Desculpe não podemos fechar a sua conta com o total geral igual á R$0.00',
+        buttons: ['OK'],
+        });
+        alert.present();
+        this.navCtrl.push('MenuPage')
+      }
+      else {
       this.item_id = console.log(t);
       let alert = this.alertCtrl.create({
         title: 'Confirmar',
@@ -49,7 +59,7 @@ public item_id;
       })
       alert.present();
   }
-
+}
     //confirma o fechamento da mesa
     confirm_close_desk_order() {
       this.nativeStorage.getItem('current_session').then
