@@ -21,9 +21,11 @@ export class AllProductsPage {
   var_category_name: string = this.navParams.get('nome_categoria');
   var_products: string = this.navParams.get('produtos_categoria');
   private enderecoApi: string = "http://192.168.0.37:3000/";
+  //private enderecoApi: string = "http://dsoft.ddns.net:777/";
   public all_products: any;
   public id_aberto: any;
   public id_produto: any;
+  public formas_de_pagamento: any;
   public currentNumber = 1;
   constructor(
      public navCtrl: NavController,
@@ -120,7 +122,7 @@ export class AllProductsPage {
                    .toPromise()
                    .then((response) => {
                      const retorno_da_API = response.json();
-                     this.navCtrl.push('CheckOrderPage',{ desk_name: retorno_da_API.mesa_venda, items: retorno_da_API.items_venda, total_geral: retorno_da_API.total_geral });
+                     this.navCtrl.push('CheckOrderPage',{ desk_name: retorno_da_API.mesa_venda, items: retorno_da_API.items_venda, total_geral: retorno_da_API.total_geral, formas_de_pagamento: retorno_da_API.formas_pagamento });
                      console.log('API Response : ', response.json());
                      resolve(response.json());
                    })

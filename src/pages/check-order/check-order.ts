@@ -14,10 +14,13 @@ import { NativeStorage } from '@ionic-native/native-storage';
 })
 export class CheckOrderPage {
 //trás os dados de outra view e armazena em variaveis do tipo string
+forma_selecionada = { form_selected: ''};
 var_desk_name: string = this.navParams.get('desk_name');
 var_desk_items: string = this.navParams.get('items');
 var_total_geral: string = this.navParams.get('total_geral');
+var_form_payments: string = this.navParams.get('formas_de_pagamento');
 private enderecoApi: string = "http://192.168.0.37:3000/";
+//private enderecoApi: string = "http://dsoft.ddns.net:777/";
 public item_id;
   constructor(
      public navCtrl: NavController,
@@ -73,6 +76,7 @@ public item_id;
                let data = JSON.stringify({
                cardToken: 'G0d1$@Bl3T0d0W4Th3V3Rth1Ng',
                desk_order_id: dados_mesa_aberta.id_da_mesa,
+               form_payment_selected: this.forma_selecionada.form_selected,
                });
 
                return new Promise((resolve, reject) => {

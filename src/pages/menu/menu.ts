@@ -21,12 +21,13 @@ export class MenuPage {
   //envia o id da categoria para a API para trazer os produtos da catagoria
   public id_category;
   public name_category;
-
-  public enderecoApi: string = "http://192.168.0.37:3000/";
+  private enderecoApi: string = "http://192.168.0.37:3000/";
+  //private enderecoApi: string = "http://dsoft.ddns.net:777/";
   public all_categories: any; // <- esta variavel é a responsável em levar os dados para a view
   public id_categoria: string;
   public nome_categoria: string;
   public produtos_categoria: any;
+  public formas_de_pagamento: any;
   constructor(
      public navCtrl: NavController,
      public navParams: NavParams,
@@ -134,7 +135,7 @@ export class MenuPage {
                .toPromise()
                .then((response) => {
                  const retorno_da_API = response.json();
-                 this.navCtrl.push('CheckOrderPage',{ desk_name: retorno_da_API.mesa_venda, items: retorno_da_API.items_venda, total_geral: retorno_da_API.total_geral });
+                 this.navCtrl.push('CheckOrderPage',{ desk_name: retorno_da_API.mesa_venda, items: retorno_da_API.items_venda, total_geral: retorno_da_API.total_geral, formas_de_pagamento: retorno_da_API.formas_pagamento });
                  console.log('API Response : ', response.json());
                  resolve(response.json());
                })

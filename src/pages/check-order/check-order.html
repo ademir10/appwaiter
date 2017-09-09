@@ -25,14 +25,19 @@
       </ion-list>
     <h1 align="right"><b>Total geral R${{ var_total_geral | number:'1.2-2' }}</b>&nbsp;</h1>
 </ion-card>
-
+<h6>Para solicitar o encerramento da sua conta, você só precisa selecionar a forma de pagamento desejada e confirmar abaixo:</h6>
+<ion-list>
+  <ion-item>
+    <ion-label>Selecione:</ion-label>
+    <ion-select [(ngModel)]="forma_selecionada.form_selected" (ionChange)="close_desk_order()">
+      <ion-option *ngFor="let list of var_form_payments" value="{{ list.id }}">{{ list.type_payment }}</ion-option>
+    </ion-select>
+  </ion-item>
+</ion-list>
 </ion-content>
 
 <ion-footer>
   <ion-toolbar>
-    <ion-buttons end>
-      <button ion-button icon-right color="royal" (click)="close_desk_order()">Fechar minha conta<ion-icon name="card"></ion-icon>
-      </button>
-    </ion-buttons>
+
   </ion-toolbar>
 </ion-footer>

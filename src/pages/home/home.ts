@@ -18,8 +18,8 @@ export class HomePage {
 public numero_mesa;
 public mensagem;
 responseData : any;
-
 private enderecoApi: string = "http://192.168.0.37:3000/";
+//private enderecoApi: string = "http://dsoft.ddns.net:777/";
 verifica_usuario: any;
 
   scanData : {};
@@ -63,7 +63,8 @@ send_desk_data(){
   //here we send the data to API
   let data = JSON.stringify({
     cardToken: 'G0d1$@Bl3T0d0W4Th3V3Rth1Ng',
-    numero_da_mesa: this.numero_mesa
+    numero_da_mesa: this.numero_mesa,
+    tipo_atendimento: 'self service'
   });
 
   return new Promise((resolve, reject) => {
