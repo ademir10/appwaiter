@@ -152,28 +152,4 @@ export class MenuPage {
           console.error('Ocorreu um erro : ', error.status);
         };
   }
-
-
-
-
-
-
-
-  // para finalizar o aplicativo e remover a tab inferior
-  backToWelcome() {
-    // mensagem no login
-    const alert = this.alertCtrl.create({
-      subTitle: 'See you soon!',
-      buttons: ['OK'],
-    });
-    alert.present();
-    this.app.getRootNav().setRoot('HomePage');
-  }
-
-  // finaliza o aplicativo depois de 1 segundo
-  logout() {
-    localStorage.clear();
-    setTimeout(() => this.backToWelcome(), 1000);
-  }
-
 }

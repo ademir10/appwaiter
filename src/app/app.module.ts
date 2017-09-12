@@ -21,7 +21,7 @@ import { MyApp } from './app.component';
     HttpModule,
     //aqui eu altero os dizeres do botão voltar
     IonicModule.forRoot(MyApp, { backButtonText: 'Voltar'} ),
-    
+
   ],
   bootstrap: [IonicApp],
   entryComponents: [

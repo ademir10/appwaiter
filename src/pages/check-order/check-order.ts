@@ -185,4 +185,22 @@ public item_id;
                 console.error('Ocorreu um erro : ', error.status);
               };
         }
+
+        // para finalizar o aplicativo e remover a tab inferior
+        backToWelcome() {
+          // mensagem no login
+          const alert = this.alertCtrl.create({
+            subTitle: 'Tudo certo!',
+            buttons: ['OK'],
+          });
+          alert.present();
+          this.app.getRootNav().setRoot('HomePage');
+        }
+
+        // finaliza o aplicativo depois de 1 segundo
+        logout() {
+          localStorage.clear();
+          this.nativeStorage.clear();
+          setTimeout(() => this.backToWelcome(), 500);
+        }
 }

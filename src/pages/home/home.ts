@@ -64,7 +64,7 @@ send_desk_data(){
   let data = JSON.stringify({
     cardToken: 'G0d1$@Bl3T0d0W4Th3V3Rth1Ng',
     numero_da_mesa: this.numero_mesa,
-    tipo_atendimento: 'self service'
+    tipo_atendimento: 'waiter'
   });
 
   return new Promise((resolve, reject) => {
@@ -76,19 +76,26 @@ send_desk_data(){
         //verify if QRpoint is free
         if (retorno_da_API.retorno_rails === 'A MESA ESTÁ LIVRE') {
           //o id da mesa é guardado localmente para ser usado na adição dos produtos
-          this.nativeStorage.setItem('current_session', {id_da_mesa: retorno_da_API.id_da_mesa})
+          this.nativeStorage.setItem('current_session', {id_da_mesa: retorno_da_API.id_da_mesa, tipo_atendimento: retorno_da_API.tipo_atendimento})
   .then(
     () => console.log('Stored session!'),
     error => console.error('Error storing session', error)
   );
-        this.mensagem = 'Olá seja bem vindo, faça o seu pedido!'
+        this.mensagem = 'Olá seja bem vindo, veja o que o cliente deseja!'
           this.navCtrl.push('MenuPage')
         }
         if (retorno_da_API.retorno_rails === 'A MESA ESTÁ EM USO') {
-          this.mensagem = 'Desculpe este local encontra-se indisponível.'
+          this.nativeStorage.clear();
+          this.nativeStorage.setItem('current_session', {id_da_mesa: retorno_da_API.id_da_mesa, tipo_atendimento: retorno_da_API.tipo_atendimento})
+
+          this.mensagem = 'Você está no QRpoint: ' + retorno_da_API.nome_qrpoint + ', veja se está certo e adicione os pedidos do cliente.'
+          this.navCtrl.push('MenuPage')
         }
         if (retorno_da_API.retorno_rails === 'CÓDIGO INVALIDO') {
           this.mensagem = 'O Código informado não existe.'
+        }
+        if (retorno_da_API.retorno_rails === 'AGUARDANDO O FECHAMENTO') {
+          this.mensagem = 'Desculpe, este local ainda está indisponível.'
         }
         if (retorno_da_API.retorno_rails === 'ACESSO NEGADO') {
           this.mensagem = 'Acesso negado!.'

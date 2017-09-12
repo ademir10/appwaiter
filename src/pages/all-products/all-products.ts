@@ -139,5 +139,4 @@ export class AllProductsPage {
               console.error('Ocorreu um erro : ', error.status);
             };
       }
-
 }
