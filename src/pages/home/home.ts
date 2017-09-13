@@ -95,7 +95,7 @@ send_desk_data(){
           this.mensagem = 'O Código informado não existe.'
         }
         if (retorno_da_API.retorno_rails === 'AGUARDANDO O FECHAMENTO') {
-          this.mensagem = 'Desculpe, este local ainda está indisponível.'
+          this.mensagem = 'Desculpe, este local ainda está aguardando o pagamento da conta, tente mais tarde.'
         }
         if (retorno_da_API.retorno_rails === 'ACESSO NEGADO') {
           this.mensagem = 'Acesso negado!.'
@@ -119,8 +119,5 @@ send_desk_data(){
     });
   });
 }
-
-
-
 
 }
