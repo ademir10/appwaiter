@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+  import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { BarcodeScanner ,BarcodeScannerOptions } from '@ionic-native/barcode-scanner';
+
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/toPromise';
@@ -14,12 +15,14 @@ import { NativeStorage } from '@ionic-native/native-storage';
   templateUrl: 'home.html',
 })
 export class HomePage {
+
 //variaveis para enviar os dados para a API
 public numero_mesa;
 public mensagem;
 responseData : any;
-private enderecoApi: string = "http://192.168.0.37:3000/";
-//private enderecoApi: string = "http://dsoft.ddns.net:777/";
+loading : any;
+//private enderecoApi: string = "http://192.168.0.37:3000/";
+private enderecoApi: string = "http://dsoft.ddns.net:777/";
 verifica_usuario: any;
 
   scanData : {};
@@ -76,13 +79,14 @@ send_desk_data(){
         //verify if QRpoint is free
         if (retorno_da_API.retorno_rails === 'A MESA ESTÁ LIVRE') {
           //o id da mesa é guardado localmente para ser usado na adição dos produtos
-          this.nativeStorage.setItem('current_session', {id_da_mesa: retorno_da_API.id_da_mesa, tipo_atendimento: retorno_da_API.tipo_atendimento})
+          this.nativeStorage.setItem('current_session', {id_da_mesa: retorno_da_API.id_da_mesa, tipo_atendimento: retorno_da_API.tipo_atendimento, qr_code_mesa: this.numero_mesa})
   .then(
     () => console.log('Stored session!'),
     error => console.error('Error storing session', error)
   );
+
+        this.navCtrl.push('MenuPage')
         this.mensagem = 'Olá seja bem vindo, veja o que o cliente deseja!'
-          this.navCtrl.push('MenuPage')
         }
         if (retorno_da_API.retorno_rails === 'A MESA ESTÁ EM USO') {
           this.nativeStorage.clear();
@@ -102,6 +106,7 @@ send_desk_data(){
         }
 
         const alert = this.alertCtrl.create({
+          title: 'Aviso:',
         subTitle: this.mensagem,
         buttons: ['OK'],
       });
@@ -115,6 +120,13 @@ send_desk_data(){
       console.error('API Error : ', error.status);
       console.error('API Error : ', JSON.stringify(error));
       reject(error.json());
+
+      const alert = this.alertCtrl.create({
+      title: 'Falha de conexão:',
+      subTitle: 'Desculpe, não conseguimos encontrar o servidor, avise o suporte.',
+      buttons: ['OK'],
+      });
+      alert.present();
 
     });
   });

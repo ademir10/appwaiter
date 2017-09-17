@@ -21,8 +21,8 @@ export class MenuPage {
   //envia o id da categoria para a API para trazer os produtos da catagoria
   public id_category;
   public name_category;
-  private enderecoApi: string = "http://192.168.0.37:3000/";
-  //private enderecoApi: string = "http://dsoft.ddns.net:777/";
+  //private enderecoApi: string = "http://192.168.0.37:3000/";
+  private enderecoApi: string = "http://dsoft.ddns.net:777/";
   public all_categories: any; // <- esta variavel é a responsável em levar os dados para a view
   public id_categoria: string;
   public nome_categoria: string;
@@ -75,81 +75,131 @@ export class MenuPage {
 
   //TRÁS TODOS OS PRODUTOS DA CATEGORIA SELECIONADA
   chama_produtos(data:any) {
-     //aproveita o nome da categoria e manda para view que exibira os produto
-     this.id_category = data.category_id;
-     this.name_category = data.category_name;
-     this.navCtrl.push('AllProductsPage',{id_categoria: data.category_id, nome_categoria: data.category_name});
-  }
+    //loading
+    let loading = this.loadingCtrl.create({
+    spinner: 'hide',
+    content: 'Carregando aguarde...'
+      });
+      loading.present();
+      //enquanto é lido o conteudo o loading fica na tela
+      setTimeout(() => {
+        //aproveita o nome da categoria e manda para view que exibira os produto
+        this.id_category = data.category_id;
+        this.name_category = data.category_name;
+        this.navCtrl.push('AllProductsPage',{id_categoria: data.category_id, nome_categoria: data.category_name});
+      });
+      setTimeout(() => {
+        loading.dismiss();
+      });
+
+    }
 
   category_products (data:any){
-    this.id_category = data.category_id;
-    this.name_category = data.category_name;
-    let headers = new Headers(
-    {
-      'Content-Type' : 'application/json'
-    });
-    let options = new RequestOptions({ headers: headers });
-    //here we send the data to API
-    let dados = JSON.stringify({
-      cardToken: 'G0d1$@Bl3T0d0W4Th3V3Rth1Ng',
-      id_da_categoria: data.category_id
-    });
-    //aqui é feito o post enviando os parametros para a API
-    return new Promise((resolve, reject) => {
-      this.http.post(this.enderecoApi + '/list_products', dados, options)
-      .toPromise()
-      //aqui o retorno da API é carregado em Json em um array
-      .then((response) => {
-        this.products = response.json();
-        //store session data and redirect to specific app view
-        //localStorage.setItem('userData', JSON.stringify(this.responseData));
-        //const page = (retorno_da_API.error) ? 'HomePage' : 'MenuPage';
-        //this.navCtrl.push(page);
-        this.navCtrl.push('AllProductsPage',{id_categoria: data.category_id, nome_categoria: data.category_name, produtos_categoria: this.products});
-        console.log('API Response : ', response.json());
-        resolve(response.json());
-      })
-      .catch((error) =>
+    //loading
+    let loading = this.loadingCtrl.create({
+    spinner: 'hide',
+    content: 'Carregando aguarde...'
+      });
+    loading.present();
+    //enquanto é lido o conteudo o loading fica na tela
+    setTimeout(() => {
+      this.id_category = data.category_id;
+      this.name_category = data.category_name;
+      let headers = new Headers(
       {
-        console.error('API Error : ', error.status);
-        console.error('API Error : ', JSON.stringify(error));
-        reject(error.json());
+        'Content-Type' : 'application/json'
+      });
+      let options = new RequestOptions({ headers: headers });
+      //here we send the data to API
+      let dados = JSON.stringify({
+        cardToken: 'G0d1$@Bl3T0d0W4Th3V3Rth1Ng',
+        id_da_categoria: data.category_id
+      });
+      //aqui é feito o post enviando os parametros para a API
+      return new Promise((resolve, reject) => {
+        this.http.post(this.enderecoApi + '/list_products', dados, options)
+        .toPromise()
+        //aqui o retorno da API é carregado em Json em um array
+        .then((response) => {
+          this.products = response.json();
+
+          this.navCtrl.push('AllProductsPage',{id_categoria: data.category_id, nome_categoria: data.category_name, produtos_categoria: this.products});
+          console.log('API Response : ', response.json());
+          resolve(response.json());
+        })
+        .catch((error) =>
+        {
+          console.error('API Error : ', error.status);
+          console.error('API Error : ', JSON.stringify(error));
+          reject(error.json());
+
+          const alert = this.alertCtrl.create({
+          title: 'Falha de conexão:',
+          subTitle: 'Desculpe, não conseguimos encontrar o servidor, avise o suporte.',
+          buttons: ['OK'],
+          });
+          alert.present();
+        });
       });
     });
-  }
+    setTimeout(() => {
+      loading.dismiss();
+    });
+ }
 
   //exibe os dados já consumidos
   check_consumacao() {
-    this.nativeStorage.getItem('current_session').then
-        ((dados_mesa_aberta) =>
-        {
-             let headers = new Headers({ 'Content-Type' : 'application/json'});
-             let options = new RequestOptions({ headers: headers });
-             //here we send the data to API
-             let data = JSON.stringify({
-             cardToken: 'G0d1$@Bl3T0d0W4Th3V3Rth1Ng',
-             desk_order_id: dados_mesa_aberta.id_da_mesa,
-             });
-             return new Promise((resolve, reject) => {
-               this.http.post(this.enderecoApi + 'check_order', data, options)
-               .toPromise()
-               .then((response) => {
-                 const retorno_da_API = response.json();
-                 this.navCtrl.push('CheckOrderPage',{ desk_name: retorno_da_API.mesa_venda, items: retorno_da_API.items_venda, total_geral: retorno_da_API.total_geral, formas_de_pagamento: retorno_da_API.formas_pagamento });
-                 console.log('API Response : ', response.json());
-                 resolve(response.json());
-               })
-               .catch((error) =>
-               {
-                 console.error('API Error : ', error.status);
-                 console.error('API Error : ', JSON.stringify(error));
-                 reject(error.json());
-
+        //loading
+      let loading = this.loadingCtrl.create({
+      spinner: 'hide',
+      content: 'Carregando aguarde…'
+    });
+    loading.present();
+    //enquanto é lido o conteudo o loading fica na tela
+    setTimeout(() => {
+      this.nativeStorage.getItem('current_session').then
+          ((dados_mesa_aberta) =>
+          {
+               let headers = new Headers({ 'Content-Type' : 'application/json'});
+               let options = new RequestOptions({ headers: headers });
+               //here we send the data to API
+               let data = JSON.stringify({
+               cardToken: 'G0d1$@Bl3T0d0W4Th3V3Rth1Ng',
+               desk_order_id: dados_mesa_aberta.id_da_mesa,
                });
-             });
+               return new Promise((resolve, reject) => {
+                 this.http.post(this.enderecoApi + 'check_order', data, options)
+                 .toPromise()
+                 .then((response) => {
+                   const retorno_da_API = response.json();
+                   this.navCtrl.push('CheckOrderPage',{ desk_name: retorno_da_API.mesa_venda, items: retorno_da_API.items_venda, total_geral: retorno_da_API.total_geral, formas_de_pagamento: retorno_da_API.formas_pagamento });
+                   console.log('API Response : ', response.json());
+                   resolve(response.json());
+                 })
+                 .catch((error) =>
+                 {
+                   console.error('API Error : ', error.status);
+                   console.error('API Error : ', JSON.stringify(error));
+                   reject(error.json());
 
-        }), error => {
-          console.error('Ocorreu um erro : ', error.status);
-        };
+                   const alert = this.alertCtrl.create({
+                   title: 'Falha de conexão:',
+                   subTitle: 'Desculpe, não conseguimos encontrar o servidor, avise o suporte.',
+                   buttons: ['OK'],
+                   });
+                   alert.present();
+
+                 });
+               });
+
+          }), error => {
+            console.error('Ocorreu um erro : ', error.status);
+          };
+    });
+
+    setTimeout(() => {
+      loading.dismiss();
+    });
+
   }
 }

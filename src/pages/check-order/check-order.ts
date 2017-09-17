@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, AlertController, NavParams,  App } from 'ionic-angular';
+import { IonicPage, NavController, LoadingController, AlertController, NavParams,  App } from 'ionic-angular';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -19,8 +19,8 @@ var_desk_name: string = this.navParams.get('desk_name');
 var_desk_items: string = this.navParams.get('items');
 var_total_geral: string = this.navParams.get('total_geral');
 var_form_payments: string = this.navParams.get('formas_de_pagamento');
-private enderecoApi: string = "http://192.168.0.37:3000/";
-//private enderecoApi: string = "http://dsoft.ddns.net:777/";
+//private enderecoApi: string = "http://192.168.0.37:3000/";
+private enderecoApi: string = "http://dsoft.ddns.net:777/";
 public item_id;
   constructor(
      public navCtrl: NavController,
@@ -28,6 +28,7 @@ public item_id;
      public alertCtrl: AlertController,
      public http: Http,
      public app: App,
+     public loadingCtrl: LoadingController,
      //para armazenar o id da mesa localmente
      private nativeStorage: NativeStorage) {
   }
@@ -65,6 +66,12 @@ public item_id;
 }
     //confirma o fechamento da mesa
     confirm_close_desk_order() {
+      //loading
+        let loading = this.loadingCtrl.create({
+        spinner: 'hide',
+        content: 'Carregando aguarde…'
+      });
+
       this.nativeStorage.getItem('current_session').then
           ((dados_mesa_aberta) =>
           {
@@ -83,17 +90,29 @@ public item_id;
                  this.http.post(this.enderecoApi + 'close_order', data, options)
                  .toPromise()
                  .then((response) => {
-                   const alert = this.alertCtrl.create({
-                   subTitle: 'Sua solicitação já foi enviada, aguarde o nosso atendente trazer a sua conta, obrigado!',
-                   buttons: ['OK'],
+
+                   loading.present();
+                   //enquanto é lido o conteudo o loading fica na tela
+                   setTimeout(() => {
+                     const alert = this.alertCtrl.create({
+                     title: 'Sucesso!',
+                     subTitle: 'Sua solicitação já foi enviada, informe o cliente que irão trazer a conta, obrigado!',
+                     buttons: ['OK'],
+                     });
+                     alert.present();
+
+                     this.nativeStorage.clear();
+                     this.app.getRootNav().setRoot('HomePage');
+
+                     console.log('API Response : ', response.json());
+                     resolve(response.json());
                    });
-                   alert.present();
 
-                   this.nativeStorage.clear();
-                   this.app.getRootNav().setRoot('HomePage');
+                   setTimeout(() => {
+                     loading.dismiss();
+                   });
 
-                   console.log('API Response : ', response.json());
-                   resolve(response.json());
+
                  })
                  .catch((error) =>
                  {
@@ -190,7 +209,8 @@ public item_id;
         backToWelcome() {
           // mensagem no login
           const alert = this.alertCtrl.create({
-            subTitle: 'Tudo certo!',
+            title: 'Sucesso!',
+            subTitle: 'Perfeito os pedidos dessa mesa foram enviados, vamos para a próxima mesa?',
             buttons: ['OK'],
           });
           alert.present();
