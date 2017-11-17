@@ -21,8 +21,8 @@ export class MenuPage {
   //envia o id da categoria para a API para trazer os produtos da catagoria
   public id_category;
   public name_category;
-  //private enderecoApi: string = "http://192.168.0.37:3000/";
-  private enderecoApi: string = "http://dsoft.ddns.net:777/";
+  private enderecoApi: string = "http://192.168.0.37:3000/";
+  //private enderecoApi: string = "http://dsoft.ddns.net:37000/";
   public all_categories: any; // <- esta variavel é a responsável em levar os dados para a view
   public id_categoria: string;
   public nome_categoria: string;

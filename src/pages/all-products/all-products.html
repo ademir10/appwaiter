@@ -16,6 +16,10 @@
     <img src="{{enderecoApi}}{{ t['image']['url'] }}" class="imgListaSize">
     <ion-card-content>
       <p>{{t.description}}</p>
+      <ion-item>
+      <ion-label color="primary">Obs:</ion-label>
+      <ion-input [(ngModel)]="observacao" placeholder="Clique aqui!" clearInput></ion-input>
+      </ion-item>
     </ion-card-content>
 
     <ion-row>
@@ -30,7 +34,7 @@
   <ion-icon name="add-circle" (click)="increment()"></ion-icon>
 </div>
         <ion-note>
-            <button ion-button small (click)="add_product({id_produto: t.id, nome_produto: t.name, qnt_produto: currentNumber })">Adicionar</button>
+           <button ion-button small (click)="add_product({id_produto: t.id, nome_produto: t.name, qnt_produto: currentNumber, obs: observacoes })">Adicionar</button>
         </ion-note>
       </ion-col>
     </ion-row>

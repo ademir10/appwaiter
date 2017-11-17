@@ -21,8 +21,8 @@ public numero_mesa;
 public mensagem;
 responseData : any;
 loading : any;
-//private enderecoApi: string = "http://192.168.0.37:3000/";
-private enderecoApi: string = "http://dsoft.ddns.net:777/";
+private enderecoApi: string = "http://192.168.0.37:3000/";
+//private enderecoApi: string = "http://dsoft.ddns.net:37000/";
 verifica_usuario: any;
 
   scanData : {};
@@ -90,7 +90,7 @@ send_desk_data(){
         }
         if (retorno_da_API.retorno_rails === 'A MESA ESTÁ EM USO') {
           this.nativeStorage.clear();
-          this.nativeStorage.setItem('current_session', {id_da_mesa: retorno_da_API.id_da_mesa, tipo_atendimento: retorno_da_API.tipo_atendimento})
+          this.nativeStorage.setItem('current_session', {id_da_mesa: retorno_da_API.id_da_mesa, tipo_atendimento: retorno_da_API.tipo_atendimento, qr_code_mesa: this.numero_mesa})
 
           this.mensagem = 'Você está no QRpoint: ' + retorno_da_API.nome_qrpoint + ', veja se está certo e adicione os pedidos do cliente.'
           this.navCtrl.push('MenuPage')

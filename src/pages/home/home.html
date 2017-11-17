@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <img src="assets/images/logo.png" class="logo-title" /><ion-title>Dsoft AppFood</ion-title>
+    <img src="assets/images/logo.png" class="logo-title" /><ion-title>D&DSoft AppFood</ion-title>
     </ion-navbar>
 
 </ion-header>
@@ -14,24 +14,30 @@
       <img src="assets/images/waiter.png">
       <h1>Olá!</h1>
       <p>Pronto para anotar os pedidos?</p>
+
+      <div align="center">
+        <button ion-button block class="marginTop" color="primary" (click)="scan()">Verificar QRcode</button>
+      </div>
     </ion-slide>
 
     <ion-slide>
       <img src="assets/images/qrcode-slide.png">
       <h1>É tudo muito simples.</h1>
       <p>Basta apontar a camera do seu dispositivo para o QRcode que se encontra na mesa.</p>
+      <br>
+      <div align="center">
+        <button ion-button block class="marginTop" color="primary" (click)="scan()">Verificar QRcode</button>
+      </div>
     </ion-slide>
 
     <ion-slide>
       <img src="assets/images/cellphone-slide.png">
       <h1>Vamos começar?</h1>
       bem vindo ao futuro!
-      <br><br><br>
+      <br><br>
         <div align="center">
-
-        <button ion-button block class="marginTop" color="primary" (click)="scan()">Verificar QRcode</button>
-
-      </div>
+          <button ion-button block class="marginTop" color="primary" (click)="scan()">Verificar QRcode</button>
+        </div>
       <!-- EXIBIR O QRCODE LIDO PELA CAMERA
       <div *ngIf="scanData">
           <p>Scanned Text: {{scanData.text}} </p>

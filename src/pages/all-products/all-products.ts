@@ -20,13 +20,14 @@ export class AllProductsPage {
   var_category_id: string = this.navParams.get('id_categoria');
   var_category_name: string = this.navParams.get('nome_categoria');
   var_products: string = this.navParams.get('produtos_categoria');
-  //private enderecoApi: string = "http://192.168.0.37:3000/";
-  private enderecoApi: string = "http://dsoft.ddns.net:777/";
+  private enderecoApi: string = "http://192.168.0.37:3000/";
+  //private enderecoApi: string = "http://dsoft.ddns.net:37000/";
   public all_products: any;
   public id_aberto: any;
   public id_produto: any;
   public formas_de_pagamento: any;
   public currentNumber = 1;
+  public observacao = '';
   constructor(
      public navCtrl: NavController,
      public navParams: NavParams,
@@ -77,7 +78,8 @@ export class AllProductsPage {
                  desk_order_id: dados_mesa_aberta.id_da_mesa,
                  product_id: this.id_produto,
                  qnt_product: this.currentNumber,
-                 qrpoint_name: dados_mesa_aberta.qr_code_mesa
+                 qrpoint_name: dados_mesa_aberta.qr_code_mesa,
+                 obs_prod: this.observacao,
                  });
 
                  return new Promise((resolve, reject) => {
@@ -91,7 +93,7 @@ export class AllProductsPage {
                      buttons: ['OK'],
                      });
                      alert.present();
-
+                    this.observacao = '';
                      console.log('API Response : ', response.json());
                      resolve(response.json());
                    })
