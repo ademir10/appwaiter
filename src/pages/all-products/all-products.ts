@@ -112,6 +112,10 @@ export class AllProductsPage {
 
                    });
                  });
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2fdba119e312d6575a7b5cdeb7b51471c97d24eb
               }
               else
               {
