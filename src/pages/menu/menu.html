@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-navbar hideBackButton="true">
+      <img src="assets/images/logo.png" class="logo-title" /><ion-title>{{ title }}</ion-title>
+  </ion-navbar>
+  <ion-searchbar (ionInput)="getItems($event)" [debounce]="500" placeholder="Buscar..."></ion-searchbar>
+</ion-header>
+
+<ion-content>
+
+<ion-item *ngFor="let t of all_categories">
+    <ion-card class="card-width">
+        <div class="item">
+            <ion-card-title>
+                &nbsp;{{ t.name }}
+            </ion-card-title>
+            <ion-thumbnail item-right class="imgListaPosition">
+                <img src="{{enderecoApi}}{{ t['image']['url'] }}" class="imgListaSize">
+            </ion-thumbnail>
+        </div>
+        <ion-card-content>
+
+            Descrição:
+            <p>
+            {{ t.description }}
+            </p>
+            <div id="button" align="right">
+
+              <button ion-button small (click)="category_products({category_id: t.id, category_name: t.name})">Exibir</button>
+
+            </div>
+        </ion-card-content>
+
+    </ion-card>
+</ion-item>
+
+
+
+
+
+
+<!-- SE TIVER BOTÃO PARA EDITAR OU EXCLUIR
+  <ion-list>
+          <ion-item-sliding *ngFor="let t of all_categories">
+              <ion-item>
+                <ion-avatar item-start>
+                  <img src="{{enderecoApi}}{{ t['image']['url'] }}"/>
+                </ion-avatar>
+                <h2>{{ t.name }}</h2>
+              </ion-item>
+            <ion-item-options side="right">
+                <button ion-button color="warning" (click)="show(t.id)"><ion-icon name="ios-information-circle"></ion-icon>Show</button>
+                  <button ion-button color="danger" (click)="delete(t.id)"><ion-icon name="trash"></ion-icon> Delete</button>
+              </ion-item-options>
+          </ion-item-sliding>
+      </ion-list>
+-->
+</ion-content >
+
+<ion-footer>
+  <ion-toolbar>
+
+    <ion-buttons end>
+      <button ion-button icon-right color="royal" (click)="check_consumacao()">Verificar consumação<ion-icon name="md-search"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
