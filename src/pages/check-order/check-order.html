@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-navbar>
+<ion-title>{{ var_desk_name }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-card>
+  <ion-card-header>
+    <h1>CONSUMAÇÃO:</h1>
+    <hr>
+  </ion-card-header>
+
+  <ion-list>
+          <ion-item-sliding *ngFor="let t of var_desk_items">
+              <ion-item>
+              <h2>{{ t.name_prod }}</h2>
+                <p><span item-left>{{ t.qnt }} x R${{ t.val_unit | number:'1.2-2' }} = </span> <span item-right> R${{ t.val_total | number:'1.2-2' }}</span></p>
+              </ion-item>
+                <ion-item-options side="right">
+                  <button ion-button color="danger" (click)="delete_item(t.id)"><ion-icon name="trash"></ion-icon> Excluir</button>
+              </ion-item-options>
+          </ion-item-sliding>
+      </ion-list>
+    <h1 align="right"><b>Total geral R${{ var_total_geral | number:'1.2-2' }}</b>&nbsp;</h1>
+</ion-card>
+<h6 align="justify">Encerrar conta:</h6>
+
+  <ion-item>
+    <ion-label>Forma pagto:</ion-label>
+    <ion-select [(ngModel)]="forma_selecionada.form_selected" (ionChange)="close_desk_order()">
+      <ion-option *ngFor="let list of var_form_payments" value="{{ list.id }}">{{ list.type_payment }}</ion-option>
+    </ion-select>
+  </ion-item>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons end>
+      <div align="left">
+        <button ion-button icon-right color="royal" (click)="logout()">Sair<ion-icon name="exit"></ion-icon></button>
+      </div>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

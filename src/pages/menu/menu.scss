@@ -1,0 +1,40 @@
+page-menu {
+  .card-width {
+    width: 100vw;
+    height: 25vw;
+  }
+
+  .item-block {
+    background-color: #f5f0eb;
+  }
+
+  .cards-bg {
+    background-color: #f5f0eb;
+    ion-item {
+        background-color: #f5f0eb;
+    }
+}
+
+.imgListaPosition {
+    position: absolute;
+    z-index: 5;
+    top: 10%;
+    left: 70%;
+}
+
+#button {
+    position: absolute;
+    z-index: 5;
+    top: 60%;
+    left: 80%;
+}
+
+.imgListaSize {
+    width: 100px;
+    height : 100px;
+    max-width: 100px;
+    max-height: 100px;
+    border-radius: 10px;
+}
+
+}
