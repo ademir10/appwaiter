@@ -19,8 +19,8 @@ var_desk_name: string = this.navParams.get('desk_name');
 var_desk_items: string = this.navParams.get('items');
 var_total_geral: string = this.navParams.get('total_geral');
 var_form_payments: string = this.navParams.get('formas_de_pagamento');
-private enderecoApi: string = "http://192.168.0.37:3000/";
-//private enderecoApi: string = "http://dsoft.ddns.net:37000/";
+//private enderecoApi: string = "http://192.168.0.37:3000/";
+private enderecoApi: string = "http://dsoft.ddns.net:37000/";
 public item_id;
   constructor(
      public navCtrl: NavController,

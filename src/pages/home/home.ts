@@ -21,8 +21,8 @@ public numero_mesa;
 public mensagem;
 responseData : any;
 loading : any;
-private enderecoApi: string = "http://192.168.0.37:3000/";
-//private enderecoApi: string = "http://dsoft.ddns.net:37000/";
+//private enderecoApi: string = "http://192.168.0.37:3000/";
+private enderecoApi: string = "http://dsoft.ddns.net:37000/";
 verifica_usuario: any;
 
   scanData : {};
